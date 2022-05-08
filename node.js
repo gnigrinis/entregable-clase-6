@@ -2,21 +2,29 @@ const express = require('express');
 const app = express();
 const fs = require ('fs');
 
-async function getProductos (fileName){
-  try{
-    //Se lee el archivo
-    const contenido = await fs.promises.readFile(fileName, 'utf-8');
-    //Se convierte el contenido del archivo a un array
-    return productos = JSON.parse(contenido);
-  }catch(error){
-    console.log('No se pudieron obtener los productos');
-    throw error;
-  }
+class Contenedor{
+  constructor(nombreArchivo){
+    this.nombreArchivo = nombreArchivo;
+    }
+    async getProductos (){
+      try{
+        //Se lee el archivo
+        const contenido = await fs.promises.readFile(this.nombreArchivo, 'utf-8');
+        //Se convierte el contenido del archivo a un array
+        productos = JSON.parse(contenido);
+      }catch(error){
+        console.log('No se pudieron obtener los productos');
+        throw error;
+      }
+    }
 }
 
-getProductos("productos.txt")
-  .then(()=>console.log("Productos agregados"))
-  .catch(()=>console.log("No se encontraron productos"));
+const contenedor = new Contenedor("productos.txt");
+
+
+productos = contenedor.getProductos("productos.txt")
+.then(()=>console.log("Productos agregados"))
+.catch(()=>console.log("No se encontraron productos"));
 
 app.get('/productos', function (req, res) {
   res.send([productos]);
