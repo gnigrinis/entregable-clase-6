@@ -18,7 +18,7 @@ getProductos("productos.txt")
   .then(()=>console.log("Productos agregados"))
   .catch(()=>console.log("No se encontraron productos"));
 
-app.get('/products', function (req, res) {
+app.get('/productos', function (req, res) {
   res.send([productos]);
 });
 
