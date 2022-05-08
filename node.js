@@ -6,7 +6,7 @@ class Contenedor{
   constructor(nombreArchivo){
     this.nombreArchivo = nombreArchivo;
     }
-    async getProductos (){
+    async getAll (){
       try{
         //Se lee el archivo
         const contenido = await fs.promises.readFile(this.nombreArchivo, 'utf-8');
@@ -22,7 +22,7 @@ class Contenedor{
 const contenedor = new Contenedor("productos.txt");
 
 
-productos = contenedor.getProductos("productos.txt")
+productos = contenedor.getAll("productos.txt")
 .then(()=>console.log("Productos agregados"))
 .catch(()=>console.log("No se encontraron productos"));
 
